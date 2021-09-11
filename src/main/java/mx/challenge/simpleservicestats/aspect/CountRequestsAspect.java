@@ -50,6 +50,7 @@ public class CountRequestsAspect {
 
     @AfterReturning(value = "countInvalid()", returning = "obj")
     public void countInvalidRequest(JoinPoint joinPoint, Object obj) {
+        // Potential issue with malformed request: Missing customer ID and/or time stamp.
         Optional<MethodArgumentNotValidException> methodArgumentNotValidExceptionOptional = Arrays.stream(joinPoint.getArgs())
                 .filter(arg -> arg instanceof MethodArgumentNotValidException).map(objArg -> (MethodArgumentNotValidException) objArg).findFirst();
         if (methodArgumentNotValidExceptionOptional.isPresent()) {
