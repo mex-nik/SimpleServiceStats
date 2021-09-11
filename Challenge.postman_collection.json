@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "22539e42-58fa-484a-bc38-aea7d5b3a595",
+		"name": "Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"customerID\":1,\"tagID\":2,\"userID\":\"aaaaaaaa-bbbb-cccc-1111-222222222222\",\"remoteIP\":\"123.234.56.78\",\"timestamp\":1631363058603}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Daily Stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stats/hourlyForDay?customerId=1&day=11-09-2021",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"hourlyForDay"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "1"
+						},
+						{
+							"key": "day",
+							"value": "11-09-2021"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
