@@ -1,6 +1,5 @@
 package mx.challenge.simpleservicestats.controller;
 
-import mx.challenge.simpleservicestats.data.db.entity.HourlyStats;
 import mx.challenge.simpleservicestats.data.output.DailyStats;
 import mx.challenge.simpleservicestats.service.HourlyStatsService;
 import mx.challenge.simpleservicestats.validation.CustomerExists;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
