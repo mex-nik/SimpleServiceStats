@@ -38,7 +38,7 @@ public class HourlyStatsServiceImpl implements HourlyStatsService {
     }
 
     @Override
-    public void incrementValid(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour) {
+    public synchronized void incrementValid(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour) {
         HourlyStats hourlyStats = hourlyStatsRepository.findByCustomer_IdAndTime(customerId, roundedToHours(hour))
                 .orElse(createNew(customerId, hour));
         hourlyStats.setRequestCount(hourlyStats.getRequestCount().add(BigInteger.ONE));
@@ -46,7 +46,7 @@ public class HourlyStatsServiceImpl implements HourlyStatsService {
     }
 
     @Override
-    public void incrementInvalid(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour) {
+    public synchronized void incrementInvalid(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour) {
         HourlyStats hourlyStats = hourlyStatsRepository.findByCustomer_IdAndTime(customerId, roundedToHours(hour))
                 .orElse(createNew(customerId, hour));
         hourlyStats.setInvalidCount(hourlyStats.getInvalidCount().add(BigInteger.ONE));
@@ -75,7 +75,7 @@ public class HourlyStatsServiceImpl implements HourlyStatsService {
         return dailyStats;
     }
 
-    private HourlyStats createNew(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour){
+    private synchronized HourlyStats createNew(@NotNull @CustomerExists Long customerId, @PastOrPresent Timestamp hour){
         Customer customer = customerRepository.findById(customerId).get();
         HourlyStats hourlyStats = new HourlyStats();
         hourlyStats.setCustomer(customer);
